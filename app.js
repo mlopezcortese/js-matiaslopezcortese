@@ -1,4 +1,10 @@
+const cardJuegos = document.querySelector(".card").textContent = "Mi lista de juegos" //lamar clase
 
+const titulos = document.querySelector("h2") //llama etiqueta.
+console.log(titulos)
+
+
+/*
 let clave = "1234";
 
 function loguear (){
@@ -21,7 +27,7 @@ function loguear (){
 
 
 if (loguear()){
-
+*/
 
 
 const juegos = [
@@ -31,6 +37,8 @@ const juegos = [
 {id:4,nombre:"Gta",genero:"aventura", precio:2400,disponible:true},
 {id:5,nombre:"Red Dead",genero:"aventura", precio:2500, disponible:true},
 ];
+
+localStorage.setItem()
 
 let carrito = []
 
@@ -49,7 +57,7 @@ if(seleccion == 1){
     let juego = prompt("Selecciona el juego a comprar")
     let precio = 0
 
-    if(juego == "Elden Ring" || juego == "Sekiro" || juego == "Warzone"|| juego == "Gta"|| juegoo == "Red Dead"){
+    if(juego == "Elden Ring" || juego == "Sekiro" || juego == "Warzone"|| juego == "Gta"|| juego == "Red Dead"){
         switch (juego) {
             case "Elden Ring":
              precio = 2100;   
@@ -105,4 +113,4 @@ for (let i = 0; i < 1 ; i++){
     }else{
         alert("Juego no encontrado")
     }
-}}
+}
