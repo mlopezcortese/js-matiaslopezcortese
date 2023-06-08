@@ -67,6 +67,7 @@ header{
 main{
     background-color: lightgray;
     padding: 2rem;
+    height: 100vh;
 }
 
 .titulo-productos{
@@ -125,6 +126,10 @@ cursor: pointer;
     
 }
 
+.carrito-vacio{
+    padding: 10px;
+}
+
 .producto-imagen-carrito{
     max-width: 150px;
     border-radius: 15px
@@ -152,9 +157,7 @@ cursor: pointer;
     color:gray
 }
 
-.carrito-vacio{
-    display: none;
-}
+
 
 .carrito-acciones{
     padding: 10px;
@@ -203,6 +206,12 @@ font-weight: bolder;
 display: flex;
 justify-content:left;
 align-items: center;
-padding:  1rem;
-
+padding: 15px;
+background-color: white;
+border-radius: 15px;
 }
+
+.disabled {
+    display: none
+}
+
