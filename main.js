@@ -6,6 +6,8 @@ const cantidad = document.getElementById('cantidad')
 const precioTotal = document.getElementById('precioTotal')
 const cantidadTotal = document.getElementById('cantidadTotal')
 
+
+
 let carrito = []
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -27,8 +29,8 @@ stockProductos.forEach((producto) => {
     <img class ="imagen-producto" src=${producto.img} alt= "">
     <h3>${producto.nombre}</h3>
     <p>${producto.categoria}</p>
-    <p class="precioProducto">Precio:$ ${producto.precio}</p>
-    <button id="agregar${producto.id}" class="boton-agregar">Agregar <i class="fas fa-shopping-cart"></i></button>
+    <p class="precio-producto">Precio:$ ${producto.precio}</p>
+    <button id="agregar${producto.id}" class="boton-agregar">Agregar 
 
 
     `
@@ -75,12 +77,14 @@ const actualizarCarrito = () => {
    
     carrito.forEach((prod) => {
         const div = document.createElement('div')
-        div.className = ('productoEnCarrito')
+        div.className = ('producto-carrito')
         div.innerHTML = `
         <p>${prod.nombre}</p>
         <p>Precio:$${prod.precio}</p>
         <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
-        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+      </svg></button>
         `
 
         contenedorCarrito.appendChild(div)
