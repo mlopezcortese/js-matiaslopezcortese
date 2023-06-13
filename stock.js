@@ -1,4 +1,4 @@
-const  stockProductos = [
+const  productos = [
     {id:1,nombre:"Elden Ring",img:"./juegos/Ering.jpg" ,categoria:"Juegos",cantidad: 1 , precio:1000},
     {id:2,nombre:"Dark Souls",img:"./juegos/Ds1.jpg ",categoria:"Juegos",cantidad: 1 , precio:2000},
     {id:3,nombre:"Dark Souls2",img:"./juegos/Ds2.jpg",categoria:"Juegos",cantidad: 1 , precio:3000},

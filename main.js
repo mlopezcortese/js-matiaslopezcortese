@@ -22,7 +22,7 @@ botonVaciar.addEventListener('click', () => {
     actualizarCarrito()
 })
 
-stockProductos.forEach((producto) => {
+productos.forEach((producto) => {
     const div = document.createElement('div')
     div.classList.add('producto')
     div.innerHTML = `
@@ -55,7 +55,7 @@ const agregarAlCarrito = (prodId) => {
             }
         })
     } else { 
-        const item = stockProductos.find((prod) => prod.id === prodId)
+        const item = productos.find((prod) => prod.id === prodId)
         carrito.push(item)
     }
     
@@ -98,3 +98,4 @@ const actualizarCarrito = () => {
     precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
     
 }
+

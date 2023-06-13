@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-bo;
 }
 
 body{
@@ -95,7 +96,7 @@ p {
     outline: none;
 }
 
-.modal-contenedor {
+.carrito-contenedor {
     position: fixed;
     top: 0;
     width: 100%;
@@ -109,7 +110,7 @@ p {
     visibility: hidden;
 }
 
-.modal-active {
+.carrito-active {
     opacity: 1;
     visibility: visible;
 }
@@ -123,7 +124,7 @@ p {
     transition: all .5s;
 }
 
-.modal-active .modal-carrito {
+.carrito-active .modal-carrito {
     margin-top: 0;
 }
 
@@ -207,3 +208,39 @@ p {
     cursor: pointer;
 }
 
+
+
+
+.fondo-loguear{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    gap: 60px;
+}
+
+.usuario-contraseña{
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 8px;
+    border-radius: 20px;
+    height: 30px;
+}
+
+.boton-usuario{
+    background-color: grey;
+    font-family: 'Roboto';
+    outline: 0;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    font-size: 18px;
+    font-weight:bolder;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+   

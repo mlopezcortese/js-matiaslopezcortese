@@ -26,15 +26,18 @@
         </ul>
     </div>
     <div class="barra-buscar">
-        <input class = "producto-buscar"type="text" name="buscador" id="buscador" placeholder="Buscar producto">
-        <button class="boton2 buscar-producto" ><i class="bi bi-search"></i></button>
+        <input class = "producto-buscar" id = "formulario" type="text" name="buscador" id="buscador" placeholder="Buscar producto">
+        <button class="boton2 buscar-producto" id ="boton-buscar" ><i class="bi bi-search"></i></button>
+        <ul id = "resultado">
+            
+        </ul>
       </div>
     <main id="contenedor-productos"">
 
 
     </main>
 
-    <div class="modal-contenedor">
+    <div class="carrito-contenedor">
         <div class="modal-carrito">
             <h3>Carrito</h3>
             <button id="carritoCerrar"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-backspace" viewBox="0 0 16 16">
@@ -54,5 +57,8 @@
 <script src="./stock.js"></script>
 <script src="./main.js"></script>
 <script src="./carrito.js"></script>
+<script src="./buscador.js"></script>
+
+
 </body>
 </html>
