@@ -18,6 +18,27 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 botonVaciar.addEventListener('click', () => {
+    
+     
+Swal.fire({
+    title: '¿Estas seguro que quieres borrar el carrito?',
+    text: "Se borraran todos los productos.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: 'black',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, borrar!',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Eliminados!',
+        'Sus productos han sido eliminados.',
+        'success'
+      )
+    }
+  })
+
     carrito.length = 0
     actualizarCarrito()
 })
@@ -44,6 +65,24 @@ productos.forEach((producto) => {
 })  
 
 const agregarAlCarrito = (prodId) => {
+    Toastify({
+        text: "Producto agregado",
+        duration: 500,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, black, grey)",
+        },
+        offset: {
+            x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+            y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+          },
+        onClick: function(){} // Callback after click
+      }).showToast();
 
     
     const existe = carrito.some (prod => prod.id === prodId)
@@ -63,6 +102,27 @@ const agregarAlCarrito = (prodId) => {
 }
 
 const eliminarDelCarrito = (prodId) => {
+    Toastify({
+        text: "Producto eliminado",
+        duration: 500,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, black, grey)",
+        },
+        offset: {
+            x: 690, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+            y: 500 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+          },
+        onClick: function(){} // Callback after click
+      }).showToast();
+
+
+
     const item = carrito.find((prod) => prod.id === prodId)
 
     const indice = carrito.indexOf(item)
@@ -72,6 +132,8 @@ const eliminarDelCarrito = (prodId) => {
 }
 
 const actualizarCarrito = () => {
+
+    
     
     contenedorCarrito.innerHTML = "" 
    
