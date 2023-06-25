@@ -1,5 +1,7 @@
 function login(){
-var user,pasword
+   
+let user
+let pasword
 
 user = document.getElementById("usuario").value;
 pasword = document.getElementById("contraseña").value
@@ -9,4 +11,6 @@ pasword = document.getElementById("contraseña").value
     }else{
         alert("conmtraseña incorrecta")
     }
+
+
 }

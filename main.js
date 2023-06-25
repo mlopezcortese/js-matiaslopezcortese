@@ -8,6 +8,7 @@ const cantidadTotal = document.getElementById('cantidadTotal')
 
 
 
+
 let carrito = []
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,26 +44,31 @@ Swal.fire({
     actualizarCarrito()
 })
 
-productos.forEach((producto) => {
-    const div = document.createElement('div')
-    div.classList.add('producto')
-    div.innerHTML = `
-    <img class ="imagen-producto" src=${producto.img} alt= "">
-    <h3>${producto.nombre}</h3>
-    <p>${producto.categoria}</p>
-    <p class="precio-producto">Precio:$ ${producto.precio}</p>
-    <button id="agregar${producto.id}" class="boton-agregar">Agregar 
+fetch("./data.json")
+.then((res)=>res.json())
+.then((data) => {
+
+  data.forEach((producto) => {
+      const div = document.createElement('div')
+      div.classList.add('producto')
+      div.innerHTML = `
+      <img class ="imagen-producto" src=${producto.img} alt= "">
+      <h3>${producto.nombre}</h3>
+      <p>${producto.categoria}</p>
+      <p class="precio-producto">Precio:$ ${producto.precio}</p>
+      <button id="agregar${producto.id}" class="boton-agregar">Agregar 
 
 
-    `
-    contenedorProductos.appendChild(div)
+      `
+      contenedorProductos.appendChild(div)
 
-     const boton = document.getElementById(`agregar${producto.id}`)
-     boton.addEventListener('click', () => {
-        agregarAlCarrito(producto.id)
-    })
+      const boton = document.getElementById(`agregar${producto.id}`)
+      boton.addEventListener('click', () => {
+          agregarAlCarrito(producto.id)
+      })
 
-})  
+  })  
+})
 
 const agregarAlCarrito = (prodId) => {
     Toastify({

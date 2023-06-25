@@ -1,3 +1,4 @@
+/*
 const  productos = [
     {id:1,nombre:"Elden Ring",img:"./juegos/Ering.jpg" ,categoria:"Juegos",cantidad: 1 , precio:1000},
     {id:2,nombre:"Dark Souls",img:"./juegos/Ds1.jpg ",categoria:"Juegos",cantidad: 1 , precio:2000},
@@ -17,3 +18,5 @@ const  productos = [
     {id:14,nombre:"Teclado Corsair K95", img:"./teclado/k95.jpg ",categoria:"Teclados",cantidad: 1,precio:8000},
     {id:15,nombre:"Teclado Corsair K100", img:"./teclado/k100.jpg ",categoria:"Teclados",cantidad: 1,precio:9000},
 ];
+
+*/1
