@@ -19,4 +19,4 @@ const  productos = [
     {id:15,nombre:"Teclado Corsair K100", img:"./teclado/k100.jpg ",categoria:"Teclados",cantidad: 1,precio:9000},
 ];
 
-*/1
+*/

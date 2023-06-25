@@ -1,76 +1,62 @@
-const contenedorProductos = document.getElementById('contenedor-productos')
-const contenedorCarrito = document.getElementById('carrito-contenedor')
-const botonVaciar = document.getElementById('vaciar-carrito')
-const contadorCarrito = document.getElementById('contadorCarrito')
-const cantidad = document.getElementById('cantidad')
-const precioTotal = document.getElementById('precioTotal')
-const cantidadTotal = document.getElementById('cantidadTotal')
+const contenedorProductos = document.getElementById('contenedor-productos');
+const contenedorCarrito = document.getElementById('carrito-contenedor');
+const botonVaciar = document.getElementById('vaciar-carrito');
+const contadorCarrito = document.getElementById('contadorCarrito');
+const precioTotal = document.getElementById('precioTotal');
 
-
-
-
-let carrito = []
+let carrito = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('carrito')){
-        carrito = JSON.parse(localStorage.getItem('carrito'))
-        actualizarCarrito()
-    }
-})
+  if (localStorage.getItem('carrito')) {
+    carrito = JSON.parse(localStorage.getItem('carrito'));
+    actualizarCarrito();
+  }
+});
 
 botonVaciar.addEventListener('click', () => {
-    
-     
-Swal.fire({
-    title: '¿Estas seguro que quieres borrar el carrito?',
-    text: "Se borraran todos los productos.",
+  Swal.fire({
+    title: '¿Estás seguro que quieres borrar el carrito?',
+    text: 'Se borrarán todos los productos.',
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: 'black',
     cancelButtonColor: '#d33',
     confirmButtonText: 'Sí, borrar!',
-    cancelButtonText: 'Cancelar'
+    cancelButtonText: 'Cancelar',
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        'Eliminados!',
-        'Sus productos han sido eliminados.',
-        'success'
-      )
+      Swal.fire('Eliminados!', 'Sus productos han sido eliminados.', 'success');
     }
-  })
+  });
 
-    carrito.length = 0
-    actualizarCarrito()
-})
+  carrito.length = 0;
+  actualizarCarrito();
+});
 
-fetch("./data.json")
-.then((res)=>res.json())
-.then((data) => {
-
-  data.forEach((producto) => {
-      const div = document.createElement('div')
-      div.classList.add('producto')
+fetch('./data.json')
+  .then((res) => res.json())
+  .then((productos) => {
+    productos.forEach((producto) => {
+      const div = document.createElement('div');
+      div.classList.add('producto');
       div.innerHTML = `
-      <img class ="imagen-producto" src=${producto.img} alt= "">
+      <img class="imagen-producto" src=${producto.img} alt="">
       <h3>${producto.nombre}</h3>
       <p>${producto.categoria}</p>
       <p class="precio-producto">Precio:$ ${producto.precio}</p>
-      <button id="agregar${producto.id}" class="boton-agregar">Agregar 
+      <button id="agregar${producto.id}" class="boton-agregar">Agregar</button>
+      `;
+      contenedorProductos.appendChild(div);
 
-
-      `
-      contenedorProductos.appendChild(div)
-
-      const boton = document.getElementById(`agregar${producto.id}`)
+      const boton = document.getElementById(`agregar${producto.id}`);
       boton.addEventListener('click', () => {
-          agregarAlCarrito(producto.id)
-      })
+        agregarAlCarrito(producto.id, productos);
+      });
+    });
+  });
 
-  })  
-})
 
-const agregarAlCarrito = (prodId) => {
+const agregarAlCarrito = (prodId,productos) => {
     Toastify({
         text: "Producto agregado",
         duration: 500,
