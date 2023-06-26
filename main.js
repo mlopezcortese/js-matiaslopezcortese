@@ -9,9 +9,10 @@ let carrito = [];
 document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('carrito')) {
     carrito = JSON.parse(localStorage.getItem('carrito'));
+    
     actualizarCarrito();
   }
-  localStorage.removeItem('carrito');
+
 });
 
 botonVaciar.addEventListener('click', () => {
@@ -79,16 +80,18 @@ const agregarAlCarrito = (prodId, productos) => {
     
     const existe = carrito.some (prod => prod.id === prodId)
 
-    if (existe){
-        const prod = carrito.map (prod => {
-            if (prod.id === prodId){
-                prod.cantidad++
-            }
-        })
-    } else { 
-        const item = productos.find((prod) => prod.id === prodId)
-        carrito.push(item)
+    if (existe) {
+      carrito.map((prod) => {
+        if (prod.id === prodId) {
+          prod.cantidad++;
+        }
+        return prod; 
+      });
+    } else {
+      const item = productos.find((prod) => prod.id === prodId);
+      carrito.push(item);
     }
+    
     
     actualizarCarrito()
 }
@@ -119,9 +122,13 @@ const eliminarDelCarrito = (prodId) => {
 
     const indice = carrito.indexOf(item)
     carrito.splice(indice, 1)
-    actualizarCarrito()
-    console.log(carrito)
-}
+    actualizarCarrito();
+  console.log(carrito);
+
+  if (carrito.length === 0) {
+    localStorage.removeItem('carrito');
+  }
+};
 
 const actualizarCarrito = () => {
 
@@ -142,13 +149,15 @@ const actualizarCarrito = () => {
         `
 
         contenedorCarrito.appendChild(div)
-        
+        if (carrito.length === 0) {
+          localStorage.removeItem('carrito');
+        }
         localStorage.setItem('carrito', JSON.stringify(carrito))
 
     })
 
     contadorCarrito.innerText = carrito.length 
-    console.log(carrito)
+    
     precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
     
 }
