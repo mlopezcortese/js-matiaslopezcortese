@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     carrito = JSON.parse(localStorage.getItem('carrito'));
     actualizarCarrito();
   }
+  localStorage.removeItem('carrito');
 });
 
 botonVaciar.addEventListener('click', () => {
@@ -55,26 +56,25 @@ fetch('./data.json')
     });
   });
 
-
-const agregarAlCarrito = (prodId,productos) => {
-    Toastify({
-        text: "Producto agregado",
-        duration: 500,
-        destination: "https://github.com/apvarun/toastify-js",
-        newWindow: true,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-          background: "linear-gradient(to right, black, grey)",
-        },
-        offset: {
-            x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-            y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-          },
-        onClick: function(){} // Callback after click
-      }).showToast();
+const agregarAlCarrito = (prodId, productos) => {
+  Toastify({
+    text: "Producto agregado",
+    duration: 500,
+    destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: "linear-gradient(to right, black, grey)",
+    },
+    offset: {
+        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+        y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+      },
+    onClick: function(){} // Callback after click
+  }).showToast();
 
     
     const existe = carrito.some (prod => prod.id === prodId)
