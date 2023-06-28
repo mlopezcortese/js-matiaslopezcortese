@@ -1,6 +1,7 @@
 const contenedorProductos = document.getElementById('contenedor-productos');
 const contenedorCarrito = document.getElementById('carrito-contenedor');
 const botonVaciar = document.getElementById('vaciar-carrito');
+const botonComprar = document.getElementById('botonComprar');
 const contadorCarrito = document.getElementById('contadorCarrito');
 const precioTotal = document.getElementById('precioTotal');
 
@@ -28,6 +29,27 @@ botonVaciar.addEventListener('click', () => {
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire('Eliminados!', 'Sus productos han sido eliminados.', 'success');
+    }
+  });
+
+  carrito.length = 0;
+  localStorage.removeItem('carrito');
+  actualizarCarrito();
+});
+
+botonComprar.addEventListener('click', () => {
+  Swal.fire({
+    title: '¿Estás seguro que quieres realizar la compra?',
+    text: '',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: 'black',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, comprar!',
+    cancelButtonText: 'Cancelar',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire('Compra confirmada!', 'Muchas gracias por tu compra.', 'success');
     }
   });
 
@@ -132,9 +154,7 @@ const eliminarDelCarrito = (prodId) => {
 };
 
 const actualizarCarrito = () => {
-
-    
-    
+       
     contenedorCarrito.innerHTML = "" 
    
     carrito.forEach((prod) => {
