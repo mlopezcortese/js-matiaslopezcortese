@@ -38,6 +38,10 @@ botonVaciar.addEventListener('click', () => {
 });
 
 botonComprar.addEventListener('click', () => {
+  if (carrito.length === 0) {
+    Swal.fire('Carrito vacío', 'Agrega productos al carrito antes de realizar la compra.', 'warning');
+    return;
+  }
   Swal.fire({
     title: '¿Estás seguro que quieres realizar la compra?',
     text: '',
@@ -120,38 +124,47 @@ const agregarAlCarrito = (prodId, productos) => {
 }
 
 const eliminarDelCarrito = (prodId) => {
-    Toastify({
-        text: "Producto eliminado",
-        duration: 500,
-        destination: "https://github.com/apvarun/toastify-js",
-        newWindow: true,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-          background: "linear-gradient(to right, black, grey)",
-        },
-        offset: {
-            x: 690, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-            y: 500 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-          },
-        onClick: function(){} // Callback after click
-      }).showToast();
+  if (carrito.length === 0) {
+    Swal.fire('Carrito vacío', 'No hay productos para eliminar.', 'warning');
+    return;
+  }
 
+  Toastify({
+    text: 'Producto eliminado',
+    duration: 500,
+    destination: 'https://github.com/apvarun/toastify-js',
+    newWindow: true,
+    close: true,
+    gravity: 'top', // `top` or `bottom`
+    position: 'right', // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: 'linear-gradient(to right, black, grey)',
+    },
+    offset: {
+      x: 690, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+      y: 500, // vertical axis - can be a number or a string indicating unity. eg: '2em'
+    },
+    onClick: function () {}, // Callback after click
+  }).showToast();
 
+  const item = carrito.find((prod) => prod.id === prodId);
 
-    const item = carrito.find((prod) => prod.id === prodId)
+  if (!item) {
+    Swal.fire('Producto no encontrado', 'No se encontró el producto en el carrito.', 'error');
+    return;
+  }
 
-    const indice = carrito.indexOf(item)
-    carrito.splice(indice, 1)
-    actualizarCarrito();
+  const indice = carrito.indexOf(item);
+  carrito.splice(indice, 1);
+  actualizarCarrito();
   console.log(carrito);
 
   if (carrito.length === 0) {
     localStorage.removeItem('carrito');
   }
 };
+
 
 const actualizarCarrito = () => {
        
