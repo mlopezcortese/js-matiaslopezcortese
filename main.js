@@ -84,44 +84,76 @@ fetch('./data.json')
     });
   });
 
-const agregarAlCarrito = (prodId, productos) => {
-  Toastify({
-    text: "Producto agregado",
-    duration: 500,
-    destination: "https://github.com/apvarun/toastify-js",
-    newWindow: true,
-    close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "right", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-      background: "linear-gradient(to right, black, grey)",
-    },
-    offset: {
-        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-        y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+  const agregarAlCarrito = (prodId, productos) => {
+    Toastify({
+      text: "Producto agregado",
+      duration: 500,
+      destination: "https://github.com/apvarun/toastify-js",
+      newWindow: true,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "linear-gradient(to right, black, grey)",
       },
-    onClick: function(){} // Callback after click
-  }).showToast();
-
-    
-    const existe = carrito.some (prod => prod.id === prodId)
-
+      offset: {
+        x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+        y: 10, // vertical axis - can be a number or a string indicating unity. eg: '2em'
+      },
+      onClick: function(){} // Callback after click
+    }).showToast();
+  
+    const existe = carrito.some(prod => prod.id === prodId);
+  
     if (existe) {
-      carrito.map((prod) => {
+      carrito.forEach(prod => {
         if (prod.id === prodId) {
           prod.cantidad++;
         }
-        return prod; 
       });
     } else {
-      const item = productos.find((prod) => prod.id === prodId);
+      const item = productos.find(prod => prod.id === prodId);
+      item.cantidad = 1;
       carrito.push(item);
     }
-    
-    
-    actualizarCarrito()
-}
+  
+    actualizarCarrito();
+  };
+  
+  const actualizarCarrito = () => {
+    contenedorCarrito.innerHTML = "";
+    let cantidadTotal = 0;
+  
+    carrito.forEach(prod => {
+      const div = document.createElement("div");
+      div.className = "producto-carrito";
+      div.innerHTML = `
+        <p>${prod.nombre}</p>
+        <p>Precio: $${prod.precio}</p>
+        <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
+        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </button>
+      `;
+  
+      contenedorCarrito.appendChild(div);
+      cantidadTotal += prod.cantidad;
+    });
+  
+    contadorCarrito.innerText = cantidadTotal;
+  
+    precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0);
+  
+    if (carrito.length === 0) {
+      localStorage.removeItem("carrito");
+    } else {
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+    }
+  };
+  
 
 const eliminarDelCarrito = (prodId) => {
   if (carrito.length === 0) {
@@ -164,35 +196,3 @@ const eliminarDelCarrito = (prodId) => {
     localStorage.removeItem('carrito');
   }
 };
-
-
-const actualizarCarrito = () => {
-       
-    contenedorCarrito.innerHTML = "" 
-   
-    carrito.forEach((prod) => {
-        const div = document.createElement('div')
-        div.className = ('producto-carrito')
-        div.innerHTML = `
-        <p>${prod.nombre}</p>
-        <p>Precio:$${prod.precio}</p>
-        <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
-        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-      </svg></button>
-        `
-
-        contenedorCarrito.appendChild(div)
-        if (carrito.length === 0) {
-          localStorage.removeItem('carrito');
-        }
-        localStorage.setItem('carrito', JSON.stringify(carrito))
-
-    })
-
-    contadorCarrito.innerText = carrito.length 
-    
-    precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
-    
-}
-

@@ -1,4 +1,4 @@
-/*
+
 const formulario = document.querySelector("#formulario");
 const boton = document.querySelector("#boton-buscar");
 const resultado =document.querySelector("#resultado")
@@ -31,4 +31,3 @@ boton.addEventListener("click",filtrar)
 formulario.addEventListener("keyup",filtrar)
 
 filtrar();
-*/
