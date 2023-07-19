@@ -196,3 +196,5 @@ const eliminarDelCarrito = (prodId) => {
     localStorage.removeItem('carrito');
   }
 };
+
+
